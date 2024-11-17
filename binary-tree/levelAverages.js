@@ -1,7 +1,10 @@
-export default function treeLevels(root) {
+export default function levelAverages(root) {
   if (root === null) return [];
+
   const stack = [{ node: root, level: 0 }];
   const levels = [];
+  const sum = (arr) => arr.reduce((acc, cur) => acc + cur);
+
   while (stack.length > 0) {
     const obj = stack.pop();
     if (levels[obj.level]) {
@@ -18,5 +21,8 @@ export default function treeLevels(root) {
       stack.push({ node: obj.node.left, level: obj.level + 1 });
     }
   }
-  return levels;
+
+  return levels.map((arr) => {
+    return sum(arr) / arr.length;
+  });
 }
